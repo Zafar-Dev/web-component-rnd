@@ -13,7 +13,8 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['src/**/*'],
-      exclude: ['src/App.tsx', 'src/App.css', 'src/main.tsx']
+      exclude: ['src/App.tsx', 'src/App.css', 'src/main.tsx', 'src/**/*.test.*', 'src/**/*.d.ts'],
+      outDir: 'dist'
     })
   ],
   build: {
@@ -24,11 +25,18 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react-dom/client'
+      ],
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'React',
+          'react-dom/client': 'ReactDOM'
         }
       }
     }

@@ -1,0 +1,79 @@
+<!-- examples/vanilla-html-example.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Widget - Vanilla HTML Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .example {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2 {
+            color: #333;
+        }
+        
+        /* Custom styling for weather widgets */
+        .custom-size {
+            width: 400px;
+            height: 320px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Widget Examples</h1>
+    
+    <div class="container">
+        <div class="example">
+            <h2>Default Widget</h2>
+            <weather-widget></weather-widget>
+        </div>
+        
+        <div class="example">
+            <h2>Dark Theme</h2>
+            <weather-widget 
+                city="Paris" 
+                theme="dark" 
+                show-forecast="true">
+            </weather-widget>
+        </div>
+        
+        <div class="example">
+            <h2>Custom Size</h2>
+            <weather-widget 
+                city="Sydney" 
+                theme="light" 
+                show-forecast="false" 
+                class="custom-size">
+            </weather-widget>
+        </div>
+    </div>
+
+    <!-- Include the widget library -->
+    <script type="module">
+        // In a real application, this would be:
+        // import '@your-org/react-web-component-widget';
+        
+        // For this example, you would need to serve the built files
+        // and import them or include them via script tags
+        console.log('Weather widgets should be rendered above');
+    </script>
+</body>
+</html>

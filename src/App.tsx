@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import WeatherWidget from './components/WeatherWidget'
-import SimpleWeatherWidget from './components/SimpleWeatherWidget'
-import WeatherWidgetSimple from './components/WeatherWidgetSimple'
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
@@ -60,24 +58,6 @@ function App() {
         <div className="widget-container">
           <h2>Weather Widget (Shadow DOM)</h2>
           <WeatherWidget
-            city={city}
-            theme={theme}
-            showForecast={showForecast}
-          />
-        </div>
-
-        <div className="widget-container">
-          <h2>TEST: Simple Shadow DOM Widget</h2>
-          <WeatherWidgetSimple
-            city={city}
-            theme={theme}
-            showForecast={showForecast}
-          />
-        </div>
-
-        <div className="widget-container">
-          <h2>Simple Weather Widget (No Shadow DOM)</h2>
-          <SimpleWeatherWidget
             city={city}
             theme={theme}
             showForecast={showForecast}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Weather Widget Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        weather-widget {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        
+        weather-widget:hover {
+            transform: translateY(-4px);
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            margin-top: 2rem;
+        }
+        
+        .status {
+            text-align: center;
+            color: white;
+            margin: 1rem 0;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ Local Weather Widget Test</h1>
+        
+        <div class="status" id="status">Loading widgets...</div>
+        
+        <div class="widget-grid">
+            <weather-widget city="London" theme="light" show-forecast="true"></weather-widget>
+            <weather-widget city="Tokyo" theme="dark" show-forecast="true"></weather-widget>
+            <weather-widget city="New York" theme="light" show-forecast="false"></weather-widget>
+            <weather-widget city="Paris" theme="dark" show-forecast="false"></weather-widget>
+        </div>
+        
+        <div class="instructions">
+            <h2>🚀 Testing Your Local Widget</h2>
+            <p>This page demonstrates importing your locally built weather widget.</p>
+            
+            <h3>What's happening:</h3>
+            <ol>
+                <li>The script imports <code>defineWeatherWidgetElement</code> from your built library</li>
+                <li>It registers the <code>&lt;weather-widget&gt;</code> custom element</li>
+                <li>The custom elements above render using React + Shadow DOM</li>
+            </ol>
+            
+            <h3>To use in other projects:</h3>
+            <ol>
+                <li>Run <code>npm pack</code> in your widget project</li>
+                <li>Install the generated .tgz file in your target project</li>
+                <li>Import and use as shown in LOCAL_DEVELOPMENT.md</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Import the locally built widget -->
+    <script type="module">
+        try {
+            // Import from the locally built dist folder
+            const { defineWeatherWidgetElement } = await import('./dist/index.js');
+            
+            // Register the custom element
+            await defineWeatherWidgetElement();
+            
+            document.getElementById('status').textContent = '✅ Weather widgets loaded successfully!';
+            document.getElementById('status').style.color = '#4ade80';
+            
+        } catch (error) {
+            console.error('Failed to load weather widget:', error);
+            document.getElementById('status').textContent = '❌ Failed to load widgets. Make sure you ran npm run build first!';
+            document.getElementById('status').style.color = '#ef4444';
+        }
+    </script>
+</body>
+</html>
