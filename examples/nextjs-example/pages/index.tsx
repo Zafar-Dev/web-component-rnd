@@ -54,7 +54,7 @@ export default function Home() {
 
         <section className={styles.usageExample}>
           <h2>Usage Example</h2>
-          <pre><code>{`import { WeatherWidget } from '@your-org/react-web-component-widget';
+          <pre><code>{`import { WeatherWidget } from 'react-web-component-widget';
 
 export default function MyPage() {
   return (

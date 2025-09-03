@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 
 // Dynamic import to avoid SSR issues
 const WeatherWidget = dynamic(
-  () => import('@your-org/react-web-component-widget').then(mod => mod.WeatherWidget),
+  () => import('react-web-component-widget').then(mod => mod.WeatherWidget),
   { 
     ssr: false,
     loading: () => <div style={{ 

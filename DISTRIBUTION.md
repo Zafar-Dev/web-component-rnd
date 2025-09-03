@@ -25,11 +25,11 @@ examples/
 #### 1. **React Applications**
 
 ```bash
-npm install @your-org/react-web-component-widget
+npm install react-web-component-widget
 ```
 
 ```tsx
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 <WeatherWidget city="London" theme="light" showForecast={true} />
 ```
@@ -37,7 +37,7 @@ import { WeatherWidget } from '@your-org/react-web-component-widget';
 #### 2. **Custom Element (Any Framework)**
 
 ```javascript
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 defineWeatherWidgetElement();
 ```
 
@@ -51,7 +51,7 @@ defineWeatherWidgetElement();
 import dynamic from 'next/dynamic';
 
 const WeatherWidget = dynamic(
-  () => import('@your-org/react-web-component-widget').then(mod => mod.WeatherWidget),
+  () => import('react-web-component-widget').then(mod => mod.WeatherWidget),
   { ssr: false }
 );
 ```

@@ -15,7 +15,7 @@ A reusable weather widget component built with React and Shadow DOM encapsulatio
 ## Installation
 
 ```bash
-npm install @your-org/react-web-component-widget
+npm install react-web-component-widget
 ```
 
 ## Quick Start
@@ -23,7 +23,7 @@ npm install @your-org/react-web-component-widget
 ### React/Next.js
 
 ```tsx
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 export default function App() {
   return (
@@ -45,7 +45,7 @@ export default function App() {
 <html>
 <head>
   <script type="module">
-    import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+    import { defineWeatherWidgetElement } from 'react-web-component-widget';
     defineWeatherWidgetElement();
   </script>
 </head>
@@ -63,7 +63,7 @@ export default function App() {
 </template>
 
 <script>
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 defineWeatherWidgetElement();
 </script>
 ```
@@ -73,7 +73,7 @@ defineWeatherWidgetElement();
 ```typescript
 // app.module.ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 
 defineWeatherWidgetElement();
 
@@ -115,7 +115,7 @@ defineWeatherWidgetElement();
 Registers the `<weather-widget>` custom element. Call this before using the widget as a custom element.
 
 ```javascript
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 defineWeatherWidgetElement();
 ```
 
@@ -154,7 +154,7 @@ weather-widget {
 import dynamic from 'next/dynamic';
 
 const WeatherWidget = dynamic(
-  () => import('@your-org/react-web-component-widget').then(mod => mod.WeatherWidget),
+  () => import('react-web-component-widget').then(mod => mod.WeatherWidget),
   { ssr: false }
 );
 
@@ -166,7 +166,7 @@ export default function Page() {
 ### Manual Custom Element Registration
 
 ```javascript
-import { getWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { getWeatherWidgetElement } from 'react-web-component-widget';
 
 // Get the custom element class for advanced usage
 getWeatherWidgetElement().then(WeatherWidgetElement => {

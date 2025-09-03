@@ -21,8 +21,8 @@ try {
   
   console.log('\n✓ Integration test completed successfully!');
   console.log('\nUsage examples:');
-  console.log('React: import { WeatherWidget } from "@your-org/react-web-component-widget"');
-  console.log('Custom Element: import "@your-org/react-web-component-widget" then use <weather-widget>');
+  console.log('React: import { WeatherWidget } from "react-web-component-widget"');
+  console.log('Custom Element: import "react-web-component-widget" then use <weather-widget>');
   
 } catch (error) {
   console.error('✗ Integration test failed:', error.message);

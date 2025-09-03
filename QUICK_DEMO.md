@@ -33,7 +33,7 @@ Replace the contents of `src/App.tsx`:
 
 ```tsx
 import React from 'react';
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 import './App.css';
 
 function App() {
@@ -95,7 +95,7 @@ For non-React frameworks or vanilla HTML:
 'use client';
 
 import { useEffect } from 'react';
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 
 export default function WeatherPage() {
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function WeatherPage() {
 </template>
 
 <script>
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 
 defineWeatherWidgetElement();
 
@@ -146,7 +146,7 @@ export default {
     <weather-widget city="Mumbai" theme="dark"></weather-widget>
 
     <script type="module">
-        import { defineWeatherWidgetElement } from './node_modules/@your-org/react-web-component-widget/dist/index.js';
+        import { defineWeatherWidgetElement } from './node_modules/react-web-component-widget/dist/index.js';
         defineWeatherWidgetElement();
     </script>
 </body>

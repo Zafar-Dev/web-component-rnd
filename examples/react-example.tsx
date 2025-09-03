@@ -1,6 +1,6 @@
 // examples/react-example.tsx
 import React from 'react';
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 function App() {
   return (

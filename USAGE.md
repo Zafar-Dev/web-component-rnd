@@ -5,7 +5,7 @@ A reusable weather widget component built with React and Shadow DOM encapsulatio
 ## Installation
 
 ```bash
-npm install @your-org/react-web-component-widget
+npm install react-web-component-widget
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ npm install @your-org/react-web-component-widget
 
 ```tsx
 import React from 'react';
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 function App() {
   return (
@@ -36,7 +36,7 @@ export default App;
 First, import the library to register the custom element:
 
 ```javascript
-import '@your-org/react-web-component-widget';
+import 'react-web-component-widget';
 ```
 
 Then use it in your HTML:
@@ -54,7 +54,7 @@ Then use it in your HTML:
 If you prefer to manually register the custom element:
 
 ```javascript
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 
 defineWeatherWidgetElement();
 ```
@@ -66,7 +66,7 @@ defineWeatherWidgetElement();
 import dynamic from 'next/dynamic';
 
 const WeatherWidget = dynamic(
-  () => import('@your-org/react-web-component-widget').then(mod => mod.WeatherWidget),
+  () => import('react-web-component-widget').then(mod => mod.WeatherWidget),
   { ssr: false }
 );
 
@@ -93,7 +93,7 @@ export default function HomePage() {
 </template>
 
 <script>
-import '@your-org/react-web-component-widget';
+import 'react-web-component-widget';
 
 export default {
   name: 'App'
@@ -106,7 +106,7 @@ export default {
 ```typescript
 // app.component.ts
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@your-org/react-web-component-widget';
+import 'react-web-component-widget';
 
 @Component({
   selector: 'app-root',

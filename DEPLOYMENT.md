@@ -31,7 +31,7 @@ Before publishing, update the following in `package.json`:
 
 ```json
 {
-  "name": "@your-org/react-web-component-widget",
+  "name": "react-web-component-widget",
   "version": "1.0.0",
   "repository": {
     "type": "git",
@@ -76,13 +76,13 @@ npm version major
 ### Installation
 
 ```bash
-npm install @your-org/react-web-component-widget
+npm install react-web-component-widget
 ```
 
 ### Import and Use
 
 ```tsx
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 function App() {
   return (
@@ -120,7 +120,7 @@ The built package includes:
 
 ### React Applications
 ```tsx
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 function App() {
   return <WeatherWidget city="London" />;
@@ -130,7 +130,7 @@ function App() {
 ### Next.js Applications
 ```tsx
 // pages/index.tsx
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 
 export default function Home() {
   return (
@@ -145,7 +145,7 @@ export default function Home() {
 ```html
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@your-org/react-web-component-widget@1.0.0/dist/index.umd.cjs"></script>
+<script src="https://unpkg.com/react-web-component-widget@1.0.0/dist/index.umd.cjs"></script>
 
 <div id="widget-container"></div>
 

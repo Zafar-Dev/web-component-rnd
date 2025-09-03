@@ -87,7 +87,7 @@ function App() {
 
       <div className="usage-example">
         <h2>Usage Example</h2>
-        <pre><code>{`import { WeatherWidget } from '@your-org/react-web-component-widget';
+        <pre><code>{`import { WeatherWidget } from 'react-web-component-widget';
 
 function MyApp() {
   return (

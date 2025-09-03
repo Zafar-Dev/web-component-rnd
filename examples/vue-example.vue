@@ -37,7 +37,7 @@
 
 <script>
 // Import the widget library to register the custom elements
-import '@your-org/react-web-component-widget';
+import 'react-web-component-widget';
 
 export default {
   name: 'WeatherApp',

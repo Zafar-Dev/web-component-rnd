@@ -1,5 +1,5 @@
 {
-  "name": "@your-org/react-web-component-widget",
+  "name": "react-web-component-widget",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.umd.cjs",

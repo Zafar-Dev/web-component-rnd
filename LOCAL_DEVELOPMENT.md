@@ -67,7 +67,7 @@ cd d:\Zafar\RND\web-component
 npm link
 
 # In your test project
-npm link @your-org/react-web-component-widget
+npm link react-web-component-widget
 ```
 
 ### Method 3: Direct File Import (Quick Testing)
@@ -92,13 +92,13 @@ cd my-test-app
 npm install /path/to/your-org-react-web-component-widget-1.0.0.tgz
 
 # Or use npm link method
-npm link @your-org/react-web-component-widget
+npm link react-web-component-widget
 ```
 
 **src/App.tsx**:
 ```tsx
 import React from 'react';
-import { WeatherWidget } from '@your-org/react-web-component-widget';
+import { WeatherWidget } from 'react-web-component-widget';
 import './App.css';
 
 function App() {
@@ -138,7 +138,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const WeatherWidget = dynamic(
-  () => import('@your-org/react-web-component-widget').then(mod => mod.WeatherWidget),
+  () => import('react-web-component-widget').then(mod => mod.WeatherWidget),
   { 
     ssr: false,
     loading: () => <div className="w-80 h-70 bg-gray-200 rounded-2xl animate-pulse flex items-center justify-center">Loading...</div>
@@ -223,7 +223,7 @@ export default function Home() {
     <!-- Option 1: Import from node_modules (if installed via npm pack) -->
     <script type="module">
         // If you installed the package
-        import { defineWeatherWidgetElement } from './node_modules/@your-org/react-web-component-widget/dist/index.js';
+        import { defineWeatherWidgetElement } from './node_modules/react-web-component-widget/dist/index.js';
         defineWeatherWidgetElement();
     </script>
 
@@ -267,7 +267,7 @@ npm install /path/to/your-org-react-web-component-widget-1.0.0.tgz
 </template>
 
 <script>
-import { defineWeatherWidgetElement } from '@your-org/react-web-component-widget';
+import { defineWeatherWidgetElement } from 'react-web-component-widget';
 
 // Register the custom element
 defineWeatherWidgetElement();
