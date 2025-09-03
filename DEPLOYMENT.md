@@ -35,12 +35,12 @@ Before publishing, update the following in `package.json`:
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/react-web-component-widget.git"
+    "url": "https://github.com/Zafar-Dev/web-component-rnd.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/react-web-component-widget/issues"
+    "url": "https://github.com/Zafar-Dev/web-component-rnd/issues"
   },
-  "homepage": "https://github.com/your-username/react-web-component-widget#readme"
+  "homepage": "https://github.com/Zafar-Dev/web-component-rnd#readme"
 }
 ```
 
