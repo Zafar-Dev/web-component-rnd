@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import WeatherWidget, { type WeatherWidgetProps } from './WeatherWidget';
 

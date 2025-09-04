@@ -9,8 +9,7 @@ A reusable weather widget component built with React and Shadow DOM encapsulatio
 - ✅ **TypeScript Support** - Full type definitions included
 - ✅ **Multiple Themes** - Light and dark mode support
 - ✅ **Customizable** - Props for city, theme, and forecast display
-- ✅ **Self-Contained** - No external CSS dependencies, React bundled internally
-- ✅ **Version Independent** - Works with any React version in host applications
+- ✅ **Self-Contained** - No external CSS dependencies
 - ✅ **SSR Safe** - Works with server-side rendering
 
 ## Installation

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 
 export interface WeatherWidgetProps {
@@ -271,8 +270,8 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
       className={className}
       style={{
         display: 'block',
-        width: '420px',
-        height: '773px',
+        width: '320px',
+        minHeight: '280px',
         position: 'relative',
         ...style,
       }}
