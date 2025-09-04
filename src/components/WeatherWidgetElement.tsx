@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot, type Root } from 'react-dom/client';
+import { createCompatibleRoot, type CompatibleReactRoot } from '../utils/reactCompat';
 import WeatherWidget, { type WeatherWidgetProps } from './WeatherWidget';
 
 /**
@@ -8,7 +8,7 @@ import WeatherWidget, { type WeatherWidgetProps } from './WeatherWidget';
  * in any HTML page or framework
  */
 class WeatherWidgetElement extends HTMLElement {
-  private reactRoot: Root | null = null;
+  private reactRoot: CompatibleReactRoot | null = null;
   private mountPoint: HTMLDivElement | null = null;
 
   static get observedAttributes() {
@@ -26,7 +26,9 @@ class WeatherWidgetElement extends HTMLElement {
 
   disconnectedCallback() {
     if (this.reactRoot) {
-      this.reactRoot.unmount();
+      this.reactRoot.unmount().catch(() => {
+        // Silently handle unmount errors
+      });
       this.reactRoot = null;
     }
   }
@@ -60,12 +62,12 @@ class WeatherWidgetElement extends HTMLElement {
       this.shadowRoot.appendChild(this.mountPoint);
     }
 
-    if (!this.reactRoot) {
-      this.reactRoot = createRoot(this.mountPoint);
-    }
+    this.reactRoot ??= createCompatibleRoot(this.mountPoint);
 
     const props = this.getProps();
-    this.reactRoot.render(React.createElement(WeatherWidget, props));
+    this.reactRoot.render(React.createElement(WeatherWidget, props)).catch((error) => {
+      console.warn('Failed to render weather widget element:', error);
+    });
   }
 }
 

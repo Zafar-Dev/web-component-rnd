@@ -1,9 +1,10 @@
 # React Weather Widget
 
-A reusable weather widget component built with React and Shadow DOM encapsulation. Framework-agnostic - works in React, Next.js, Vue, Angular, and vanilla HTML.
+A reusable weather widget component built with React and Shadow DOM encapsulation. Framework-agnostic - works in React, Next.js, Vue, Angular, and vanilla HTML. **Compatible with both React 17 and React 19**.
 
 ## Features
 
+- ✅ **React 17 & 19 Compatible** - Automatic API detection and fallback
 - ✅ **Shadow DOM Encapsulation** - Complete style isolation
 - ✅ **Framework Agnostic** - Works in React, Next.js, Vue, Angular, vanilla HTML
 - ✅ **TypeScript Support** - Full type definitions included
@@ -145,6 +146,35 @@ weather-widget {
   border-radius: 12px;
 }
 ```
+
+## React Compatibility
+
+This library automatically detects your React version and uses the appropriate rendering API:
+
+- **React 17**: Uses legacy `ReactDOM.render()` and `ReactDOM.unmountComponentAtNode()`
+- **React 18+**: Uses modern `createRoot()` and `root.unmount()` APIs
+
+### Compatibility Utilities
+
+```tsx
+import { getReactVersion, supportsModernReact } from 'react-web-component-widget';
+
+// Check React version at runtime
+console.log('React version:', getReactVersion()); // "17.0.2" or "19.0.0"
+
+// Check if modern React APIs are available
+console.log('Modern React:', supportsModernReact()); // true for React 18+
+```
+
+### Supported React Versions
+
+| React Version | Status | Rendering API |
+|---------------|---------|---------------|
+| 17.x | ✅ Supported | `ReactDOM.render` (legacy) |
+| 18.x | ✅ Supported | `createRoot` (concurrent) |
+| 19.x | ✅ Supported | `createRoot` (concurrent) |
+
+The library automatically detects the available API and falls back gracefully.
 
 ## Advanced Usage
 

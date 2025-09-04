@@ -3,6 +3,9 @@ export type { WeatherWidgetProps } from './components/WeatherWidget';
 export { default as WeatherWidget } from './components/WeatherWidget';
 export { default } from './components/WeatherWidget';
 
+// Compatibility utilities
+export { getReactVersion, supportsModernReact } from './utils/reactCompat';
+
 // Browser-only utilities
 export const defineWeatherWidgetElement = async () => {
   if (typeof window !== 'undefined' && typeof HTMLElement !== 'undefined' && typeof customElements !== 'undefined') {

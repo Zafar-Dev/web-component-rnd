@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { createRoot, type Root } from 'react-dom/client';
+import { createCompatibleRoot, type CompatibleReactRoot } from '../utils/reactCompat';
 
 export interface WeatherWidgetProps {
   city?: string;
@@ -192,7 +192,7 @@ const useWeatherData = (city: string): WeatherData => {
 
 // Hook for Shadow DOM management
 const useShadowDOM = (containerRef: React.RefObject<HTMLDivElement | null>) => {
-  const reactRootRef = useRef<Root | null>(null);
+  const reactRootRef = useRef<CompatibleReactRoot | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -213,24 +213,24 @@ const useShadowDOM = (containerRef: React.RefObject<HTMLDivElement | null>) => {
     reactContainer.style.cssText = 'width: 100%; height: 100%; display: block;';
     shadowRoot.appendChild(reactContainer);
 
-    // Create new React root
-    reactRootRef.current = createRoot(reactContainer);
+    // Create new React root using compatibility layer
+    reactRootRef.current = createCompatibleRoot(reactContainer);
 
-    // Cleanup only on unmount
-    return () => {
+    // Cleanup function
+    const cleanup = () => {
       if (reactRootRef.current) {
         const rootToCleanup = reactRootRef.current;
         reactRootRef.current = null;
-
-        // Defer unmount to avoid race conditions
-        setTimeout(() => {
-          try {
-            rootToCleanup.unmount();
-          } catch {
-            // Silently handle unmount errors
-          }
-        }, 0);
+        rootToCleanup.unmount().catch(() => {
+          // Silently handle unmount errors
+        });
       }
+    };
+
+    // Cleanup only on unmount
+    return () => {
+      // Defer unmount to avoid race conditions
+      setTimeout(cleanup, 0);
     };
   }, [containerRef]); // Include containerRef in dependencies
 
@@ -261,7 +261,9 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
         theme={theme}
         showForecast={showForecast}
       />
-    );
+    ).catch((error) => {
+      console.warn('Failed to render weather widget:', error);
+    });
   }, [weatherData, theme, showForecast, reactRootRef]); // Re-render when props change
 
   return (
