@@ -1,6 +1,6 @@
 # React Weather Widget
 
-A reusable weather widget component built with React and Shadow DOM encapsulation. Can be used as a React component or as a native web component in any framework.
+A reusable weather widget component built with React and Shadow DOM encapsulation. Can be used as a React component or as a native web component in any framework. React is bundled internally, making it compatible with any React version in host applications.
 
 ## Installation
 

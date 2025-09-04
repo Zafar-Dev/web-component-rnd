@@ -25,20 +25,15 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        'react-dom/client'
-      ],
+      // Remove external dependencies to bundle React with the component
+      // This ensures the component works regardless of the host app's React version
+      external: [],
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'React',
-          'react-dom/client': 'ReactDOM'
-        }
+        // No need for globals since we're bundling React
+        globals: {}
       }
-    }
+    },
+    // Increase chunk size warning limit since we're bundling React
+    chunkSizeWarningLimit: 1000
   }
 })
