@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import WeatherWidget from './components/WeatherWidget'
+import { WeatherWidget } from '.'
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')

@@ -25,15 +25,19 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`
     },
     rollupOptions: {
-      // Remove external dependencies to bundle React with the component
-      // This ensures the component works regardless of the host app's React version
+      // Bundle React with namespace isolation
       external: [],
       output: {
-        // No need for globals since we're bundling React
         globals: {}
       }
     },
     // Increase chunk size warning limit since we're bundling React
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Enable minification for better isolation
+    minify: true
+  },
+  define: {
+    // Namespace our React to avoid conflicts
+    'process.env.NODE_ENV': '"production"'
   }
 })

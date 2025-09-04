@@ -1,9 +1,20 @@
-// Main exports for React web component widget
+// Main exports for React web component widget with namespace isolation
 export type { WeatherWidgetProps } from './components/WeatherWidget';
-export { default as WeatherWidget } from './components/WeatherWidget';
-export { default } from './components/WeatherWidget';
 
-// Browser-only utilities
+// Export the namespaced React component as the main component
+export { NamespacedWeatherWidget as WeatherWidget, NamespacedWeatherWidget as default } from './components/NamespacedWeatherWidget';
+
+// Export the isolated widget class for advanced usage
+export { IsolatedWeatherWidget } from './components/NamespacedWeatherWidget';
+
+// Export namespace utilities for advanced use cases
+export { 
+  initializeIsolatedReact, 
+  withIsolatedReact, 
+  createIsolatedComponent 
+} from './utils/reactNamespace';
+
+// Browser-only utilities (keeping custom element support for non-React usage)
 export const defineWeatherWidgetElement = async () => {
   if (typeof window !== 'undefined' && typeof HTMLElement !== 'undefined' && typeof customElements !== 'undefined') {
     try {
