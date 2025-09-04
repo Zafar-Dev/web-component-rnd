@@ -14,85 +14,93 @@ interface LegacyReactDOM {
   unmountComponentAtNode: (container: Element) => boolean;
 }
 
-// Check if we're using React 18+ (has createRoot)
+// Global variables to track React API availability
 let createRoot: CreateRootFunction | undefined;
-let legacyReactDOM: LegacyReactDOM | undefined;
+let ReactDOM: LegacyReactDOM | undefined;
 let hasCreateRoot = false;
 
-// Initialize React API detection
+// Simplified React API detection using only dynamic imports
 const initializeReactAPI = async () => {
+  // First try to load the modern React 18+ API
   try {
-    // Try to import createRoot from react-dom/client (React 18+)
     const reactDomClient = await import('react-dom/client');
-    createRoot = reactDomClient.createRoot;
-    hasCreateRoot = true;
-  } catch {
-    // Fall back to legacy ReactDOM.render for React 17
-    try {
-      const reactDom = await import('react-dom');
-      legacyReactDOM = reactDom as unknown as LegacyReactDOM;
-      hasCreateRoot = false;
-    } catch (error) {
-      console.warn('Failed to import ReactDOM:', error);
+    if (reactDomClient.createRoot) {
+      createRoot = reactDomClient.createRoot;
+      hasCreateRoot = true;
+      return; // Success with modern API
     }
+  } catch {
+    // react-dom/client not available, continue to legacy
+  }
+
+  // Fallback to React 17 legacy API
+  try {
+    const reactDom = await import('react-dom');
+    // Use type assertion since React 19 types don't include legacy methods
+    const legacyReactDOM = reactDom as unknown as LegacyReactDOM;
+    if (typeof legacyReactDOM.render === 'function' && typeof legacyReactDOM.unmountComponentAtNode === 'function') {
+      ReactDOM = legacyReactDOM;
+      hasCreateRoot = false;
+    }
+  } catch (error) {
+    console.error('Failed to load ReactDOM:', error);
   }
 };
 
 // Initialize immediately
-initializeReactAPI().catch(console.warn);
+initializeReactAPI().catch((error) => {
+  console.warn('React API initialization failed:', error);
+});
+
+// Initialize immediately
+initializeReactAPI().catch((error) => {
+  console.warn('React API initialization failed:', error);
+});
 
 /**
  * Cross-compatible React root management
  * Supports both React 17 (legacy) and React 18+ (concurrent) APIs
  */
 export class CompatibleReactRoot {
-  private container: Element | DocumentFragment;
+  private readonly container: Element | DocumentFragment;
   private modernRoot: ReactRoot | null = null;
-  private isLegacy: boolean;
-  private isInitialized = false;
 
   constructor(container: Element | DocumentFragment) {
     this.container = container;
-    this.isLegacy = !hasCreateRoot;
   }
 
-  private async ensureInitialized(): Promise<void> {
-    if (this.isInitialized) return;
-
-    if (!hasCreateRoot && !legacyReactDOM) {
+  private async ensureReactAPILoaded(): Promise<void> {
+    // If we don't have either API yet, wait for initialization
+    if (!hasCreateRoot && !ReactDOM) {
       await initializeReactAPI();
-      this.isLegacy = !hasCreateRoot;
     }
-
-    if (!this.isLegacy && createRoot && !this.modernRoot) {
-      this.modernRoot = createRoot(this.container);
-    }
-
-    this.isInitialized = true;
   }
 
   async render(element: React.ReactElement): Promise<void> {
-    await this.ensureInitialized();
+    await this.ensureReactAPILoaded();
 
-    if (this.isLegacy && legacyReactDOM) {
-      // React 17 legacy rendering
-      legacyReactDOM.render(element, this.container as Element);
-    } else if (this.modernRoot) {
+    if (hasCreateRoot && createRoot) {
       // React 18+ concurrent rendering
+      this.modernRoot ??= createRoot(this.container);
       this.modernRoot.render(element);
+    } else if (ReactDOM) {
+      // React 17 legacy rendering
+      ReactDOM.render(element, this.container as Element);
+    } else {
+      console.error('No React rendering API available. Please ensure React and ReactDOM are properly installed.');
     }
   }
 
   async unmount(): Promise<void> {
-    await this.ensureInitialized();
+    await this.ensureReactAPILoaded();
 
-    if (this.isLegacy && legacyReactDOM) {
-      // React 17 legacy unmounting
-      legacyReactDOM.unmountComponentAtNode(this.container as Element);
-    } else if (this.modernRoot) {
+    if (this.modernRoot) {
       // React 18+ concurrent unmounting
       this.modernRoot.unmount();
       this.modernRoot = null;
+    } else if (ReactDOM) {
+      // React 17 legacy unmounting
+      ReactDOM.unmountComponentAtNode(this.container as Element);
     }
   }
 
